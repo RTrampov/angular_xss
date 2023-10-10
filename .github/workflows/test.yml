@@ -1,6 +1,7 @@
 ---
 name: Tests
-'on':
+on:
+  workflow_dispatch:
   push:
     branches:
     - master
@@ -14,42 +15,31 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - ruby: 2.5.9
-          gemfile: Gemfile.rails-3.2
-        - ruby: 2.5.9
-          gemfile: Gemfile.rails-4.2.haml-4
-        - ruby: 2.5.9
-          gemfile: Gemfile.rails-4.2.haml-5
-        - ruby: 2.5.9
-          gemfile: Gemfile.rails-5.1.haml-4
-        - ruby: 2.5.9
-          gemfile: Gemfile.rails-5.1.haml-5
-
-        - ruby: 2.7.2
-          gemfile: Gemfile.rails-5.1.haml-4
-        - ruby: 2.7.2
-          gemfile: Gemfile.rails-5.1.haml-5
-        - ruby: 2.7.2
-          gemfile: Gemfile.rails-6.1.haml-5
-        - ruby: 2.7.2
-          gemfile: Gemfile.rails-7.0.haml-5
-
-        - ruby: 3.0.1
-          gemfile: Gemfile.rails-5.1.haml-4
-        - ruby: 3.0.1
-          gemfile: Gemfile.rails-5.1.haml-5
-        - ruby: 3.0.1
-          gemfile: Gemfile.rails-6.1.haml-5
-        - ruby: 3.0.1
-          gemfile: Gemfile.rails-7.0.haml-5
+        - ruby_version: 2.6.6
+          rails_version: 4.2
+        - ruby_version: 2.7.2
+          rails_version: 5.2
+        - ruby_version: 2.7.2
+          rails_version: 6.1
+        - ruby_version: 3.0.6
+          rails_version: 5.2
+        - ruby_version: 3.0.6
+          rails_version: 6.1
+        - ruby_version: 3.1.4
+          rails_version: 5.2
+        - ruby_version: 3.1.4
+          rails_version: 6.1
+#        - ruby_version: 3.0.6
+#          rails_version: 7.0
+    name: "Tests on Ruby ${{ matrix.ruby_version }} and Rails ${{ matrix.rails_version }}"
     env:
-      BUNDLE_GEMFILE: "${{ matrix.gemfile }}"
+      BUNDLE_GEMFILE: "Gemfile.rails-${{ matrix.rails_version }}"
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Install ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "${{ matrix.ruby }}"
+        ruby-version: "${{ matrix.ruby_version }}"
     - name: Bundle
       run: |
         gem install bundler:2.1.4

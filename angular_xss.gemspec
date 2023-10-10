@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors = ["Henning Koch"]
   s.email = 'henning.koch@makandra.de'
   s.homepage = 'https://github.com/makandra/angular_xss'
-  s.summary = 'Patches rails_xss and Haml so AngularJS interpolations are auto-escaped in unsafe strings.'
+  s.summary = 'Patches rails_xss so AngularJS interpolations are auto-escaped in unsafe strings.'
   s.description = s.summary
   s.license = 'MIT'
   s.metadata = { 'rubygems_mfa_required' => 'true' }
@@ -16,6 +16,5 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^spec/})
   s.require_paths = ["lib"]
 
-  s.add_dependency('activesupport')
-  s.add_dependency('haml', '>=3.1.5') # Haml below 3.1.5 does not escape HTML attributes by default. Do not use it!
+  s.add_dependency('activesupport', '> 4.2')
 end

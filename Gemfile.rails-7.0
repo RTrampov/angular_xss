@@ -1,0 +1,9 @@
+ruby '> 3.0'
+
+source 'http://rubygems.org'
+
+gem 'actionpack', '~> 7.0'
+gem 'rspec'
+gem 'angular_xss', path: '.'
+gem 'gemika'
+gem 'rake'

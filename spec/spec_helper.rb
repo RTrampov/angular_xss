@@ -16,9 +16,6 @@ module Rails
   end
 end
 
-require 'haml'
-require 'haml/template'
-
 require 'angular_xss'
 
 
