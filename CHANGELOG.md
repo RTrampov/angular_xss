@@ -9,6 +9,11 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ### Breaking changes
 
+## 0.5.0 2023-10-12
+
+### Breaking changes
+
+- Remove HAML support
 
 ## 0.4.1 2022-03-16
 
