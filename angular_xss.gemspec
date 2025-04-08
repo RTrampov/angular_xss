@@ -10,11 +10,11 @@ Gem::Specification.new do |s|
   s.summary = 'Patches rails_xss so AngularJS interpolations are auto-escaped in unsafe strings.'
   s.description = s.summary
   s.license = 'MIT'
-  s.metadata = { 'rubygems_mfa_required' => 'true' }
+  s.metadata = {'rubygems_mfa_required' => 'true'}
 
-  s.files         = `git ls-files`.split($\)
-  s.test_files    = s.files.grep(%r{^spec/})
+  s.files = `git ls-files`.split($\)
+  s.test_files = s.files.grep(%r{^spec/})
   s.require_paths = ["lib"]
 
-  s.add_dependency('activesupport', '> 4.2')
+  s.add_dependency('activesupport', '> 6.1', '< 8.0')
 end

@@ -1,7 +1,7 @@
 angular_xss [![Build Status](https://github.com/RTrampov/angular_xss/workflows/Tests/badge.svg)](https://github.com/RTrampov/angular_xss/actions)
 ===========
 
-Fork of [makandra/angular_xss](https://github.com/makandra/angular_xss) with removed HAML dependency. 
+Fork of [makandra/angular_xss](https://github.com/makandra/angular_xss) with removed HAML dependency.
 
 When rendering AngularJS templates with a server-side templating engine like ERB it is easy to introduce XSS vulnerabilities. These vulnerabilities are enabled by AngularJS evaluating user-provided strings containing interpolation symbols (default symbols are `{{` and `}}`).
 
@@ -52,7 +52,7 @@ Development
 
 - Fork the repository.
 - Push your changes with specs.
-- You may run single tests with a specified Rails version via `BUNDLE_GEMFILE=Gemfile.rails-5.2 bundle exec rspec ./spec/angular_xss`
+- You may run single tests with a specified Rails version via `BUNDLE_GEMFILE=Gemfile.rails-6.1 bundle exec rspec ./spec/angular_xss`
 - Send a pull request.
 
 
