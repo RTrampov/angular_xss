@@ -1,18 +1,14 @@
-# Use module_eval so we crash when ERB::Util has not yet been loaded.
-ERB::Util.module_eval do
-  def unwrapped_html_escape_with_escaping_angular_expressions(s)
-    s = s.to_s
-    if s.html_safe?
-      s
-    else
-      unwrapped_html_escape_without_escaping_angular_expressions(AngularXss::Escaper.escape(s))
-    end
+# https://github.com/rails/rails/blob/main/activesupport/lib/active_support/core_ext/erb/util.rb
+module ERBUtilExt
+  def html_escape_once(s)
+    super(AngularXss::Escaper.escape_if_unsafe(s))
   end
 
-  alias_method :unwrapped_html_escape_without_escaping_angular_expressions, :unwrapped_html_escape
-  alias_method :unwrapped_html_escape, :unwrapped_html_escape_with_escaping_angular_expressions
+  def unwrapped_html_escape(s)
+    super(AngularXss::Escaper.escape_if_unsafe(s))
+  end
 
-  singleton_class.send(:remove_method, :unwrapped_html_escape)
-  module_function :unwrapped_html_escape
-  module_function :unwrapped_html_escape_without_escaping_angular_expressions
+  # Note that html_escape() and h() are passively fixed as they are calling the two methods above
 end
+ERB::Util.prepend ERBUtilExt
+ERB::Util.singleton_class.prepend ERBUtilExt

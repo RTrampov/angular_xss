@@ -1,22 +1,19 @@
 module AngularXss
-
   def self.disable(&block)
     Escaper.disable(&block)
   end
 
-
   class Escaper
-
     XSS_DISABLED_KEY = :_angular_xss_disabled
 
-    #BRACE = [
+    # BRACE = [
     #  '\\{',
     #  '&lcub;',
     #  '&lbrace;',
     #  '&#x0*7b;',
     #  '&#0*123;',
     #]
-    #DOUBLE_BRACE_REGEXP = Regexp.new("(#{BRACE.join('|')})(#{BRACE.join('|')})", Regexp::IGNORECASE)
+    # DOUBLE_BRACE_REGEXP = Regexp.new("(#{BRACE.join('|')})(#{BRACE.join('|')})", Regexp::IGNORECASE)
 
     def self.escape(string)
       return unless string
@@ -24,6 +21,14 @@ module AngularXss
         string
       else
         string.to_s.gsub('{{'.freeze, '{{ $root.DOUBLE_LEFT_CURLY_BRACE }}'.freeze)
+      end
+    end
+
+    def self.escape_if_unsafe(string)
+      if string.nil? || string.to_s.html_safe?
+        string
+      else
+        escape(string.to_s)
       end
     end
 
@@ -38,6 +43,5 @@ module AngularXss
     ensure
       Thread.current[XSS_DISABLED_KEY] = old_disabled
     end
-
   end
 end

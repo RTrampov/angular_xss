@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
   s.metadata = {'rubygems_mfa_required' => 'true'}
 
-  s.files = `git ls-files`.split($\)
-  s.test_files = s.files.grep(%r{^spec/})
+  s.files = Dir['lib/**/*']
+  s.test_files = Dir['spec/**/*']
   s.require_paths = ["lib"]
 
-  s.add_dependency('activesupport', '> 6.1', '< 8.0')
+  s.add_dependency('activesupport', '> 5.2', '< 8.0')
 end

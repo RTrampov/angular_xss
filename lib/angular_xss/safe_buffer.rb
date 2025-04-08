@@ -4,12 +4,12 @@
 # Link to the original implementation without Angular XSS escaping:
 # https://github.com/rails/rails/blob/7-0-stable/activesupport/lib/active_support/core_ext/string/output_safety.rb#L295
 #
-ActiveSupport::SafeBuffer.class_eval do
 
+ActiveSupport::SafeBuffer.class_eval do
   html_escape = :html_escape_interpolated_argument
 
   if private_method_defined?(html_escape) || # Rails < 6.1
-    private_method_defined?(:"explicit_#{html_escape}") # Rails >= 6.1
+      private_method_defined?(:"explicit_#{html_escape}") # Rails >= 6.1
 
     private
 
@@ -37,6 +37,7 @@ ActiveSupport::SafeBuffer.class_eval do
           implicit_html_escape_interpolated_argument_without_angular_xss(AngularXss::Escaper.escape(arg))
         end
       end
+
       alias_method :"implicit_#{html_escape}_without_angular_xss", :"implicit_#{html_escape}"
       alias_method :"implicit_#{html_escape}", :"implicit_#{html_escape}_with_angular_xss"
     end

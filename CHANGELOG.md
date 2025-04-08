@@ -3,11 +3,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 0.7.1 2025-04-08
 
 ### Compatible changes
 
+- Add compatibility with Rails 7.1
+
 ### Breaking changes
+
+- Remove compatibility with Rails < 6.1
 
 ## 0.5.0 2023-10-12
 
